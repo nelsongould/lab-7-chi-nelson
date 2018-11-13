@@ -20,8 +20,14 @@ gc_df <- read_csv("gc_df.csv")
 
 We are asking: Is there a significant difference in recommended gun control action for male and female respondents (should guns be easier, harder, or the same difficulty to get)?
 
-Sounds good!
+Nelson: Data wrangling and counts
 
-Lol okay 
+```{r}
+
+get_guns <- gc_df %>% 
+  filter(gender != "NA", make_get_guns != "NA") %>% 
+  count(gender, make_get_guns)
+
+```
 
 
