@@ -1,0 +1,14 @@
+---
+title: "Gun Control Chi-Square"
+author: "Nelson Gould"
+date: "11/13/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This: I'm Nelson and I am a little boy updating this markdown file here.
+
+
