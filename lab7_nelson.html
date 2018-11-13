@@ -131,12 +131,12 @@ $(document).ready(function () {
 
 <p>This: I’m Nelson and I am updating this markdown file here.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
 ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
 ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
 ## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>gc_df &lt;- read_csv(&quot;gc_df.csv&quot;)</code></pre>
@@ -151,6 +151,31 @@ $(document).ready(function () {
 ##   race = col_character()
 ## )</code></pre>
 <p>We are asking: Is there a significant difference in recommended gun control action for male and female respondents (should guns be easier, harder, or the same difficulty to get)?</p>
+<p>Nelson: Data wrangling and counts</p>
+<pre class="r"><code>get_guns &lt;- gc_df %&gt;% 
+  filter(gender != &quot;NA&quot;, make_get_guns != &quot;NA&quot;) %&gt;% 
+  count(gender, make_get_guns) %&gt;% 
+  spread(make_get_guns, n) %&gt;% 
+  select(-gender) 
+
+rownames(get_guns) &lt;- c(&quot;Female&quot;,&quot;Male&quot;)</code></pre>
+<pre><code>## Warning: Setting row names on a tibble is deprecated.</code></pre>
+<p>My name is Maddie the amazing collaborator and I am doing a chi-squared test for independence!</p>
+<p>We ask: “Is there a significant association between sex and opinion on whether guns should be more difficult, easier or the same difficulty to get?”</p>
+<pre class="r"><code># Let's look at the actual proportions
+
+guns_prop &lt;- prop.table(as.matrix(get_guns), 1)
+
+#Run chi-square test for independence
+
+guns_x2 &lt;- chisq.test(get_guns)
+guns_x2</code></pre>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  get_guns
+## X-squared = 203.6, df = 2, p-value &lt; 2.2e-16</code></pre>
+<p>“Recomended government action on gun access differed significantly between male (n = ) and female (n = ) respondents (<span class="math inline">\(\chi^2\)</span>(2) = …, p &lt;0.001). Notably, a much higher proportion of female respondents (57.4%) recommend making it more difficult to get guns, compared to 40.4% of male respondents.</p>
 
 
 

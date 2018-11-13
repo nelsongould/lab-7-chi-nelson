@@ -37,3 +37,21 @@ rownames(get_guns) <- c("Female","Male")
 ```
 
 
+My name is Maddie the amazing collaborator and I am doing a chi-squared test for independence!
+
+We ask: "Is there a significant association between sex and opinion on whether guns should be more difficult, easier or the same difficulty to get?"
+
+
+```{r}
+
+# Let's look at the actual proportions
+
+guns_prop <- prop.table(as.matrix(get_guns), 1)
+
+#Run chi-square test for independence
+
+guns_x2 <- chisq.test(get_guns)
+guns_x2
+```
+
+"Recomended government action on gun access differed significantly between male (n = ) and female (n = ) respondents ($\chi^2$(`r guns_x2$parameter`) = ..., p <0.001). Notably, a much higher proportion of female respondents (57.4%) recommend making it more difficult to get guns, compared to 40.4% of male respondents. 
